@@ -1,14 +1,8 @@
-!!!
-%html
-  %head
-    %title Eitangoru
-  %body
-    %form(action="/" method="get")
-      %input(type="submit" value="search")
-    %div
-      %p
-        .word= @word.word
-      %p
-        .mean= @word.mean
-      %p
-        .frequency= "頻出度: #{@word.level}"
+%form(id="searchForm" action="/" method="get")
+.clickableBox
+  %p
+    .word= @word.word
+  %p
+    .mean= @word.mean
+  %p
+    .frequency= "頻出度: #{@word.level}"
