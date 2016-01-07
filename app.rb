@@ -8,6 +8,13 @@ class Word < ActiveRecord::Base
 end
 
 class App < Sinatra::Base
+  configure do
+    set :assets_precompile, %w(application.js application.css)
+    set :assets_css_compressor, :sass
+    set :assets_js_compressor, :uglifier
+    register Sinatra::AssetPipeline
+  end
+
   get "/" do
     @word = Word.offset(rand(Word.count)).first
     haml :index
