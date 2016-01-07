@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "sinatra"
-gem "sqlite3"
-gem "activerecord"
+gem "sinatra", require: "sinatra/base"
+gem "sqlite3", require: false
+gem "activerecord", require: "active_record"
 gem "haml"
