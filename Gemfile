@@ -6,3 +6,7 @@ gem "uglifier"
 gem "sqlite3", require: false
 gem "activerecord", require: "active_record"
 gem "haml"
+
+source "https://rails-assets.org" do
+  gem "rails-assets-bootstrap"
+end

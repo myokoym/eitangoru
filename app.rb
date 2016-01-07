@@ -13,6 +13,12 @@ class App < Sinatra::Base
     set :assets_css_compressor, :sass
     set :assets_js_compressor, :uglifier
     register Sinatra::AssetPipeline
+
+    if defined?(RailsAssets)
+      RailsAssets.load_paths.each do |path|
+        settings.sprockets.append_path(path)
+      end
+    end
   end
 
   get "/" do
