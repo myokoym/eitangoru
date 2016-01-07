@@ -75,6 +75,7 @@ DEPENDENCIES
   activerecord
   haml
   rails-assets-bootstrap!
+  rails-assets-jquery!
   sinatra
   sinatra-asset-pipeline
   sqlite3
