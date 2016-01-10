@@ -22,7 +22,16 @@ class App < Sinatra::Base
   end
 
   get "/" do
-    @word = Word.offset(rand(Word.count)).first
     haml :index
+  end
+
+  get "/word.json" do
+    word = Word.offset(rand(Word.count)).first
+    response =  {
+      word: word.word,
+      mean: word.mean,
+      level: word.level,
+    }
+    json response
   end
 end

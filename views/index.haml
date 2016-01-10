@@ -1,5 +1,6 @@
-%form(id="searchForm" action="/" method="get")
 .clickableBox
-  %h2.word= @word.word
-  %p.lead= @word.mean
-  %p.frequency= "頻出度: #{@word.level}"
+  %h2.word
+  %p.lead
+  %p
+    %label(for="frequency") 頻出度:
+    %span#frequency
