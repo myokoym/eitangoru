@@ -22,10 +22,14 @@ class App < Sinatra::Base
   end
 
   get "/" do
+    p request.path
+    p request.xhr?
     haml :index
   end
 
   get "/word.json" do
+    p request.path
+    p request.xhr?
     word = Word.offset(rand(Word.count)).first
     response =  {
       word: word.word,
