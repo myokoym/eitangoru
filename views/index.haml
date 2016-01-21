@@ -1,6 +1,6 @@
 #clickableBox
-  %h2#word
-  %p#mean.lead
+  %h2#word= @word.word
+  %p#mean.lead= @word.mean
   %p
     %label(for="frequency") 頻出度:
-    %span#frequency
+    %span#frequency= @word.level

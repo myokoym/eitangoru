@@ -13,8 +13,7 @@ var load = function() {
 }
 
 $(document).ready(function() {
-  load();
   $("#clickableBox").click(function() {
-    load();
+    $(this).load('/');
   });
 });
