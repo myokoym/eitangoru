@@ -7,6 +7,37 @@ ActiveRecord::Base.establish_connection(:development)
 class Word < ActiveRecord::Base
 end
 
+class Admin < Sinatra::Base
+  enable :sessions
+
+  use OmniAuth::Builder do
+    provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+  end
+
+  before '/admin' do
+    redirect to('/auth/twitter') unless current_user
+  end
+
+  get "/admin" do
+    haml :admin
+  end
+
+  get '/auth/twitter/callback' do
+    session[:uid] = env['omniauth.auth']['uid']
+    redirect to('/admin')
+  end
+
+  get '/auth/failure' do
+    halt 401, 'ERROR MESSAGE'
+  end
+
+  helpers do
+    def current_user
+      !session[:uid].nil?
+    end
+  end
+end
+
 class App < Sinatra::Base
   configure do
     set :assets_precompile, %w(application.js application.css)
@@ -38,4 +69,6 @@ class App < Sinatra::Base
     }
     json response
   end
+
+  use Admin
 end
