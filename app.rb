@@ -7,7 +7,22 @@ ActiveRecord::Base.establish_connection(:development)
 class Word < ActiveRecord::Base
 end
 
-class Admin < Sinatra::Base
+class Base < Sinatra::Base
+  configure do
+    set :assets_precompile, %w(application.js application.css)
+    set :assets_css_compressor, :sass
+    set :assets_js_compressor, :uglifier
+    register Sinatra::AssetPipeline
+
+    if defined?(RailsAssets)
+      RailsAssets.load_paths.each do |path|
+        settings.sprockets.append_path(path)
+      end
+    end
+  end
+end
+
+class Admin < Base
   enable :sessions
 
   use OmniAuth::Builder do
@@ -38,20 +53,7 @@ class Admin < Sinatra::Base
   end
 end
 
-class App < Sinatra::Base
-  configure do
-    set :assets_precompile, %w(application.js application.css)
-    set :assets_css_compressor, :sass
-    set :assets_js_compressor, :uglifier
-    register Sinatra::AssetPipeline
-
-    if defined?(RailsAssets)
-      RailsAssets.load_paths.each do |path|
-        settings.sprockets.append_path(path)
-      end
-    end
-  end
-
+class App < Base
   get "/" do
     p request.path
     p request.xhr?
